@@ -1,5 +1,5 @@
 const path = require('path');
-const HtmlWebpackPlugin = requiere('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry:'./src/index.js',
@@ -21,7 +21,7 @@ module.exports = {
             },
             {
                 test: /\.svelte$/,
-                exlude: /node_modules/,
+                exclude: /node_modules/,
                 use: {
                     loader: 'svelte-loader'
                 }
