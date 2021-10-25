@@ -61,8 +61,16 @@
     color: black;
   }
   .Stories-items {
-    margin: 0.5em 0 0.5em 0;
+    margin: 0.5em;
   }
+
+  .Stories-items span {
+    font-size: 12px;
+    font-weight: normal;
+    color: black;
+    margin: 1em;
+  }
+
   .Stories-item-box {
     width: 32px;
     height: 32px;
