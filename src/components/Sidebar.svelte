@@ -4,9 +4,20 @@
     import Footer from "./Footer.svelte";
 </script>
 <div class="Sidebar">
-    <div class="Sidebar-conta">
+    <div class="Sidebar-container">
         <Profile />
         <Stories />
         <Footer />
     </div>
 </div>
+
+<!-- Sidebar.svelte -->
+<style>
+    .Sidebar {
+      position: relative;
+      padding: 4.5em 0 0 0;
+    }
+    .Sidebar-container {
+      position: fixed;
+    }
+  </style>
