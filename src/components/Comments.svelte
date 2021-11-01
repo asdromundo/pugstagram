@@ -1,17 +1,40 @@
+<script>
+  export let comments = [];
+
+  function addComment(e) {
+    const msg = e.target.text.value;
+    if (msg.length > 0) {
+      const message = {
+        id: Date.now(),
+        text: msg,
+        username: "asdromundo"
+      };
+
+      comments = [...comments, message];
+      e.target.text.value = "";
+    }
+  }
+</script>
+
 <div class="Comments">
   <div class="Comments-content">
-    <div class="Comments-users">
-      <h3>Crispeta</h3>
-      <span>Mira que bonita la foto</span>
-    </div>
+
+    {#each comments as comment (comment.id)}
+      <div class="Comments-users">
+        <h3>{comment.username}</h3>
+        <span>{comment.text}</span>
+      </div>
+    {/each}
+
     <div class="Comments-add">
-      <form>
+      <form on:submit|preventDefault={addComment}>
         <input
           type="text"
           class="Comments-input"
           placeholder="Agregar comentario..."
-          id="text-comment"
+          id="text"
         />
+        <button type="submit">Post</button>
       </form>
     </div>
   </div>
@@ -58,14 +81,15 @@
     width: 100%;
     display: flex;
   }
-  /* button {
+  button {
     border: none;
     color: #3897f0;
-    font-size: 12px;
+    font-size: 14px;
     outline: none;
     cursor: pointer;
+    background-color: transparent;
   }
-  label {
+  /* label {
     display: none;
-  } */
+  }  */
 </style>

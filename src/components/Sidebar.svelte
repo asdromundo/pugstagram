@@ -3,8 +3,8 @@
     import Stories from "./Stories.svelte";
     import Footer from "./Footer.svelte";
 
-    export let nickname;
-    export let name;
+    let nickname = "asdromundo";
+    let name = "Antonio S. Dromundo";
 </script>
 
 <div class="Sidebar">

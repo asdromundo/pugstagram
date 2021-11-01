@@ -1,4 +1,4 @@
-<script context="module">
+<script >
   import { onMount } from "svelte"
   import Header from "../components/Header.svelte";
   import Main from "../components/Main.svelte";
@@ -8,7 +8,7 @@
   let data = {};
   const API = "https://kittygram-api.vercel.app/"
   onMount(async () => {
-    const response = await fetch();
+    const response = await fetch(API);
     data = await response.json();
   });
 </script>
