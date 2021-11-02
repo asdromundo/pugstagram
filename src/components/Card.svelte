@@ -3,7 +3,8 @@
   import Modal from "./Modal.svelte";
   import Share from "./Share.svelte";
 
-  import { blur } from  'svelte/transition';
+  import { blur } from "svelte/transition";
+  import { likeCount } from "../store/store.js"
 
   export let username;
   export let location;
@@ -12,23 +13,28 @@
   export let comments;
   export let avatar;
 
-  let isModal=false;
+  let isModal = false;
+  let like = false;
+  let bookmark = false;
 
   function handleModal() {
     isModal = !isModal;
   }
 
+  function handleLike() {
+    like = !like;
+    likeCount.update(n => like ? n + 1 : n - 1);
+  }
 </script>
 
 <div class="Card">
-
-{#if isModal}
-  <div transition:blur>
-    <Modal>
-      <Share on:click={handleModal} />
-    </Modal>
-  </div>
-{/if}
+  {#if isModal}
+    <div transition:blur>
+      <Modal>
+        <Share on:click={handleModal} />
+      </Modal>
+    </div>
+  {/if}
 
   <div class="Card-container">
     <div class="Card-Header">
@@ -44,24 +50,33 @@
       </div>
     </div>
     <div class="Card-photo">
-      <figure>
+      <figure on:dblclick={handleLike}>
         <img src={photo} alt={username} />
       </figure>
     </div>
     <div class="Card-icons">
       <div class="Card-icons-first">
-        <span class="material-icons">favorite</span>
+        <span
+          class="material-icons"
+          class:active-like={like}
+          on:click={handleLike}>favorite</span
+        >
         <span class="material-icons" on:click={handleModal}>share</span>
       </div>
       <div class="Card-icons-second">
-        <span class="material-icons">bookmark</span>
+        <span
+          class="material-icons"
+          class:active-bookmark={bookmark}
+          on:click={() => (bookmark = !bookmark)}
+          >bookmark</span
+        >
       </div>
     </div>
     <div class="Card-description">
       <h3>{username}</h3>
       <span>{postComment}</span>
     </div>
-    <Comments {comments}/>
+    <Comments {comments} />
   </div>
 </div>
 
@@ -144,16 +159,16 @@
   .Card-description span {
     font-size: 14px;
   }
-  /* .active-like {
-      color: #bc1888;
-      animation: bounce linear 0.8s;
-      animation-iteration-count: 1;
-      transform-origin: 20% 20%;
-    }
-    .active-bookmark {
-      color: #f09433;
-    }
-   */
+  .active-like {
+    color: #bc1888;
+    animation: bounce linear 0.8s;
+    animation-iteration-count: 1;
+    transform-origin: 20% 20%;
+  }
+  .active-bookmark {
+    color: #f09433;
+  }
+
   @keyframes bounce {
     0% {
       transform: translate(0px, 0px);

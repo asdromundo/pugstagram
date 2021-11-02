@@ -1,3 +1,7 @@
+<script>
+  import { likeCount } from "../store/store.js";
+</script>
+
 <div class="Header">
   <div class="Header-container">
     <div class="Header-content">
@@ -7,7 +11,10 @@
       <div class="Header-nav">
         <ul>
           <li>
-            <span class="material-icons">favorite</span>
+            <span class="material-icons">favorite </span>
+            {$likeCount === 0 ? '' : $likeCount}
+          </li>
+          <li>
             <span class="material-icons">person</span>
           </li>
         </ul>
